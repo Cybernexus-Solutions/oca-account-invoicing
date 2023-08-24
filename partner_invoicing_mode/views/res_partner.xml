@@ -8,6 +8,7 @@
             <xpath expr="//page[@name='accounting']/group" position="inside">
                 <group name="invoicing_mode" string="Invoicing Mode">
                     <field name="invoicing_mode" />
+                    <field name="invoicing_user_id" attrs="{'invisible': [('invoicing_mode','=','standard')]}"/>
                     <field name="one_invoice_per_order" />
                 </group>
             </xpath>

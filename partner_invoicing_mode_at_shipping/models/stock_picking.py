@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from odoo import _, models
-
+import datetime
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
@@ -11,7 +11,7 @@ class StockPicking(models.Model):
         res = super()._action_done()
         for picking in self:
             if picking._invoice_at_shipping():
-                picking.with_delay()._invoicing_at_shipping()
+                picking.with_user(picking.sale_id.partner_invoice_id.invoicing_user_id or picking.company_id.invoicing_default_user_id or self.env.user).with_delay(eta=datetime.datetime.now() + datetime.timedelta(0,1))._invoicing_at_shipping()
         return res
 
     def _invoice_at_shipping(self):

@@ -40,7 +40,8 @@ class SaleOrder(models.Model):
         )
         for saleorder_group in saleorder_groups:
             saleorder_ids = self.search(saleorder_group["__domain"]).ids
-            self.with_delay()._generate_invoices_by_partner(saleorder_ids)
+            for saleorder_id in saleorder_ids:
+                self.with_user(saleorder_id.partner_invoice_id.invoicing_user_id or saleorder_id.company_id.invoicing_default_user_id or self.env.user).with_delay()._generate_invoices_by_partner(saleorder_id)
         companies.write({"invoicing_mode_monthly_last_execution": datetime.now()})
         return saleorder_groups
 

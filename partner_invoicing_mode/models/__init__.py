@@ -1,3 +1,5 @@
+from . import company
+from . import res_config_settings
 from . import account_invoice
 from . import queue_job
 from . import res_partner
