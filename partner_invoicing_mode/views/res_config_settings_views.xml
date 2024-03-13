@@ -5,28 +5,11 @@
         <field name="model">res.config.settings</field>
         <field name="arch" type="xml">
             <block id="invoicing_settings" position="after">
-                <h2>Invoicing Mode</h2>
-                <div
-                    class="row mt16 o_settings_container"
-                    id="general_invoicing_settings"
-                >
-                    <div class="col-12 col-lg-6 o_setting_box">
-                        <div class="o_setting_left_pane" />
-                        <div class="o_setting_right_pane">
-                            <span class="o_form_label">Invoicing Options</span>
-                            <div class="content-group">
-                                <div class="row mt16">
-                                    <label
-                                        string="Default Invoicing User"
-                                        for="res_invoicing_default_user_id"
-                                        class="col-lg-4 o_light_label"
-                                    />
-                                    <field name="res_invoicing_default_user_id" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <block id="invoicing_mode" title="Partner Invoicing">
+                    <setting help="Select a user to always use for invoicing">
+                        <field name="res_invoicing_default_user_id" />
+                    </setting>
+                </block>
             </block>
         </field>
     </record>
