@@ -39,10 +39,10 @@ class StockPicking(models.Model):
         )
         invoices = self.env["account.move"]
         if sales_one_invoice_per_order:
-            invoices |= sales_one_invoice_per_order._create_invoices(grouped=True)
+            invoices |= sales_one_invoice_per_order._create_invoices(grouped=True, final=True)
         sales_many_invoice_per_order = sales - sales_one_invoice_per_order
         if sales_many_invoice_per_order:
-            invoices |= sales_many_invoice_per_order._create_invoices(grouped=False)
+            invoices |= sales_many_invoice_per_order._create_invoices(grouped=False, final=True)
         for invoice in invoices:
             invoice.with_delay()._validate_invoice()
         return invoices or _("Nothing to invoice.")
