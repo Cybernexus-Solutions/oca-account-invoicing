@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="model">res.config.settings</field>
+        <field name="arch" type="xml">
+            <block id="invoicing_settings" position="after">
+                <block id="invoicing_mode" title="Partner Invoicing">
+                    <setting help="Select a user to always use for invoicing">
+                        <field name="res_invoicing_default_user_id" />
+                    </setting>
+                </block>
+            </block>
+        </field>
+    </record>
+</odoo>
